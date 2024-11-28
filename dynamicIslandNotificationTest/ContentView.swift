@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import ActivityKit
 
 struct ContentView: View {
     @State private var startTime: Date? = nil
     @State private var isTrackingTime: Bool = false
+    @State private var activity: Activity<NotificationAttributes>? = nil
     
     var body: some View {
         NavigationView {
@@ -23,8 +25,20 @@ struct ContentView: View {
                     
                     if isTrackingTime {
                         startTime = Date()
+                        
+                        let attributes = NotificationAttributes()
+                        let state = NotificationAttributes.ContentState(startTime: Date())
+                        
+                        activity = try? Activity<NotificationAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
                     } else {
-                        startTime = nil
+                        guard let startTime else { return }
+                        let state = NotificationAttributes.ContentState(startTime: startTime)
+                        
+                        Task {
+                            await activity?.end(using: state, dismissalPolicy: .immediate)
+                        }
+                        
+                        self.startTime = nil
                     }
                 } label: {
                     Text(isTrackingTime ? "Stop" : "Start")
