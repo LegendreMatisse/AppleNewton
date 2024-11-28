@@ -70,6 +70,7 @@
 		C1E847EB2CF9054800F0FC9C /* Exceptions for "dynamicIslandNotificationTest" folder in "NotificationWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				ContentView.swift,
 				NotificationAttributes.swift,
 			);
 			target = C1E847D32CF904B800F0FC9C /* NotificationWidgetExtension */;

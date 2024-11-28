@@ -16,12 +16,12 @@ struct NotificationWidget: Widget {
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("MAIN")
+                    Text("TEST")
                 }
             } compactLeading: {
-                Text("CL")
+                Image("Manchester").resizable().aspectRatio(contentMode: .fill)
             } compactTrailing: {
-                Text("CT")
+                Image("Arsenal").resizable().aspectRatio(contentMode: .fill)
             } minimal: {
                 Text("M")
             }
