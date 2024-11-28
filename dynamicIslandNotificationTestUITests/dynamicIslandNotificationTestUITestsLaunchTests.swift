@@ -1,13 +1,13 @@
 //
-//  dynamicIslandNotificationUITestsLaunchTests.swift
-//  dynamicIslandNotificationUITests
+//  dynamicIslandNotificationTestUITestsLaunchTests.swift
+//  dynamicIslandNotificationTestUITests
 //
 //  Created by Quinten Raymaekers on 28/11/2024.
 //
 
 import XCTest
 
-final class dynamicIslandNotificationUITestsLaunchTests: XCTestCase {
+final class dynamicIslandNotificationTestUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
