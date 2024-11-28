@@ -16,12 +16,30 @@ struct NotificationWidget: Widget {
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("TEST")
+                    HStack {
+                        Image("Manchester").resizable().aspectRatio(contentMode: .fill)
+                        Text("1")
+                    }
+                }
+                DynamicIslandExpandedRegion(.center) {
+                    Text("87")
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    HStack {
+                        Text("0")
+                        Image("Arsenal").resizable().aspectRatio(contentMode: .fill)
+                    }
                 }
             } compactLeading: {
-                Image("Manchester").resizable().aspectRatio(contentMode: .fill)
+                HStack {
+                    Image("Manchester").resizable().aspectRatio(contentMode: .fill)
+                    Text("1")
+                }
             } compactTrailing: {
-                Image("Arsenal").resizable().aspectRatio(contentMode: .fill)
+                HStack {
+                    Text("0")
+                    Image("Arsenal").resizable().aspectRatio(contentMode: .fill)
+                }
             } minimal: {
                 Text("M")
             }
