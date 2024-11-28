@@ -47,7 +47,8 @@ struct ContentView: View {
                         .frame(width: 200, height: 200)
                         .background(Circle().fill(isTrackingTime ? .red : .green))
                 }
-                .navigationTitle("Dynamic Island Notification Test")
+                .navigationTitle(Text("Apple Newton"))
+                .navigationBarHidden(true)
             }
         }
     }

@@ -17,17 +17,17 @@ struct NotificationWidget: Widget {
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
                     HStack {
-                        Image("Manchester").resizable().aspectRatio(contentMode: .fill)
-                        Text("1")
+                        Image("Manchester").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
+                        Text("1").bold().font(.system(size: 36))
                     }
                 }
                 DynamicIslandExpandedRegion(.center) {
-                    Text("87")
+                    Text("87'").bold().font(.system(size: 16)).foregroundStyle(.gray)
                 }
                 DynamicIslandExpandedRegion(.trailing) {
                     HStack {
-                        Text("0")
-                        Image("Arsenal").resizable().aspectRatio(contentMode: .fill)
+                        Text("0").bold().font(.system(size: 36))
+                        Image("Arsenal").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
                     }
                 }
             } compactLeading: {
