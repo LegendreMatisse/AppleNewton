@@ -14,6 +14,27 @@ enum ActivityType {
     case elections
 }
 
+let Type: ActivityType = .sports
+
+var team1Scored: Bool = false;
+var team2Scored: Bool = false;
+
+var team1Score: Int = 1
+var team2Score: Int = 0
+
+func simulateGoal(team: Int) {
+    if team == 1 {
+        team1Scored = true
+        team1Score += 1
+        team2Scored = false
+    } else {
+        team1Scored = false
+        team2Scored = true
+        team2Score += 1
+    }
+    WidgetCenter.shared.reloadAllTimelines()
+}
+
 
 struct NotificationWidget: Widget {
     @State private var activity: Activity<NotificationAttributes>? = nil
@@ -27,10 +48,50 @@ struct NotificationWidget: Widget {
             
             if Type == "Sports" {
                 return DynamicIsland {
+            switch Type {
+            case .sports:
+                DynamicIsland {
+                    DynamicIslandExpandedRegion(.bottom) {
+                        HStack {
+                            if team1Scored {
+                                HStack {
+                                    Image("Goal")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 50, height: 50)
+                                    VStack(alignment: .leading) {
+                                        Text("E. Haaland")
+                                            .bold()
+                                            .font(.system(size: 16))
+                                        Text("Assist: K. De Bruyne")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                Spacer()
+                            } else if team2Scored {
+                                Spacer()
+                                HStack {
+                                    VStack(alignment: .trailing) {
+                                        Text("L. Trossard")
+                                            .bold()
+                                            .font(.system(size: 16))
+                                        Text("Assist: B. Saka")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(.gray)
+                                    }
+                                    Image("Goal")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 50, height: 50)
+                                }
+                            }
+                        }
+                    }
                     DynamicIslandExpandedRegion(.leading) {
                         HStack {
                             Image("Manchester").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
-                            Text("1").bold().font(.system(size: 36))
+                            Text("\(team1Score)").bold().font(.system(size: 36))
                         }
                     }
                     DynamicIslandExpandedRegion(.center) {
@@ -39,13 +100,17 @@ struct NotificationWidget: Widget {
                     DynamicIslandExpandedRegion(.trailing) {
                         
                         HStack {
-                            Text("0").bold().font(.system(size: 36))
+                            Text("\(team2Score)").bold().font(.system(size: 36))
                             Image("Arsenal").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
                         }
                     }
                 } compactLeading: {
                     HStack {
-                        Image("Manchester").resizable().aspectRatio(contentMode: .fill)
+                        if !team1Scored {
+                            Image("Manchester").resizable().aspectRatio(contentMode: .fill)
+                        } else {
+                            Image("Goal").resizable().aspectRatio(contentMode: .fill)
+                        }
                         Text("1")
                     }
                 } compactTrailing: {
