@@ -22,19 +22,31 @@ struct NotificationWidget: Widget {
             //NotificationWidgetView(context: context)
             
             let columns = [
-                    GridItem(.adaptive(minimum: 80)),
-                    GridItem(.adaptive(minimum: 80)),
-                    GridItem(.adaptive(minimum: 80)),
-                    GridItem(.adaptive(minimum: 80)),
-                    GridItem(.adaptive(minimum: 80)),
-                    GridItem(.adaptive(minimum: 80))
+                    GridItem(.adaptive(minimum: 56)),
+                    GridItem(.adaptive(minimum: 56)),
+                    GridItem(.adaptive(minimum: 56)),
+                    GridItem(.adaptive(minimum: 56)),
+                    GridItem(.adaptive(minimum: 56)),
+                    GridItem(.adaptive(minimum: 56))
             ]
             
             LazyVGrid(columns: columns, spacing: 5)
             {
-                ForEach(0..<6) { index in
-                    Text("NVA")
-                }
+                /*Text("NVA").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
+                Text("PVDA").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
+                Text("Vlaams Belang").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
+                Text("Vooruit").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
+                Text("Groen").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
+                Text("Open VLD").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)*/
+                
+                ForEach(["NVA", "PVDA", "Vlaams Belang", "Vooruit", "Groen", "Open VLD"], id: \.self) { item in
+                                HStack {
+                                    Text(item)
+                                        .font(.system(size: 12))
+                                        .bold()
+                                        .multilineTextAlignment(.center)
+                                }
+                            }
             }
             
         }
