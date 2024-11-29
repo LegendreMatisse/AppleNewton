@@ -12,14 +12,29 @@ struct ContentView: View {
     @State private var startTime: Date? = nil
     @State private var isTrackingTime: Bool = false
     @State private var activity: Activity<NotificationAttributes>? = nil
+    @State private var selectedCategory: Category = .sports
+    enum Category: String, CaseIterable, Identifiable {
+        case sports, elections
+        var id: Self { self }
+    }
+    
     
     var body: some View {
+        
         NavigationView {
+            
+            
             VStack {
+                
                 if let startTime {
                     Text(startTime, style: .relative)
                 }
                 
+                Picker("Category", selection: $selectedCategory) {
+                    ForEach(Category.allCases) { category in
+                        Text(category.rawValue.capitalized)
+                        }
+                }.pickerStyle(.segmented)
                 Button {
                     isTrackingTime.toggle()
                     
@@ -44,7 +59,7 @@ struct ContentView: View {
                     Text(isTrackingTime ? "Stop" : "Start")
                         .fontWeight(.light)
                         .foregroundColor(.white)
-                        .frame(width: 200, height: 200)
+                        .frame(width: 30, height: 30)
                         .background(Circle().fill(isTrackingTime ? .red : .green))
                 }
                 .navigationTitle(Text("Apple Newton"))
