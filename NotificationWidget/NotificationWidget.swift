@@ -19,7 +19,24 @@ let Type: ActivityType = .elections
 struct NotificationWidget: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: NotificationAttributes.self) { context in
-            NotificationWidgetView(context: context)
+            //NotificationWidgetView(context: context)
+            
+            let columns = [
+                    GridItem(.adaptive(minimum: 80)),
+                    GridItem(.adaptive(minimum: 80)),
+                    GridItem(.adaptive(minimum: 80)),
+                    GridItem(.adaptive(minimum: 80)),
+                    GridItem(.adaptive(minimum: 80)),
+                    GridItem(.adaptive(minimum: 80))
+            ]
+            
+            LazyVGrid(columns: columns, spacing: 5)
+            {
+                ForEach(0..<6) { index in
+                    Text("NVA")
+                }
+            }
+            
         }
         dynamicIsland: { context in
             switch Type {
