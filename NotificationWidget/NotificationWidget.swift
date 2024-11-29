@@ -171,10 +171,10 @@ struct NotificationWidget: Widget {
                             }
                             DynamicIslandExpandedRegion(.trailing) {
                                 HStack(alignment: .bottom, spacing: 2) {
-                                    Text("40")
+                                    Text("386")
                                         .font(.system(size: 16))
                                         .bold()
-                                    Text("/300")
+                                    Text("/387")
                                         .font(.system(size: 12))
                                         .foregroundStyle(.secondary)
                                 }
