@@ -35,6 +35,8 @@ func simulateGoal(team: Int) {
     WidgetCenter.shared.reloadAllTimelines()
 }
 
+let parties = ["NVA", "PVDA", "VB", "VOORUIT", "GROEN", "CD&V"]
+let partyResults = [25.4, 23, 15.8, 12.3, 11.2, 5.4]
 
 struct NotificationWidget: Widget {
     @State private var activity: Activity<NotificationAttributes>? = nil
@@ -54,14 +56,16 @@ struct NotificationWidget: Widget {
             
             LazyVGrid(columns: columns, spacing: 5)
             {
-                ForEach(["25.4%", "23%", "15.8%", "12.3%", "11.2%", "5.4%"], id: \.self) { item in
+                ForEach(0..<parties.count) { i in
                     VStack {
                         //bar chart
-                        Text(item)
+                        // party results with one decimal behind the comma
+                        let result = String(format: "%.1f", partyResults[i])
+                        Text(result + "%")
                             .font(.system(size: 12))
                             .bold()
                             .multilineTextAlignment(.center)
-                        Image("NVA")
+                        Image("\(parties[i])")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 35, height: 35)
@@ -155,10 +159,11 @@ struct NotificationWidget: Widget {
                             DynamicIslandExpandedRegion(.bottom) {
                                 HStack {
                                     Spacer()
-                                    ForEach(0..<6) { _ in
+                                    ForEach(0..<parties.count) { i in
                                         VStack {
-                                            Text("24%").font(.system(size: 12)).bold()
-                                            Image("NVA")
+                                            let result = String(format: "%.1f", partyResults[i])
+                                            Text(result + "%").font(.system(size: 12)).bold()
+                                            Image("\(parties[i])")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
                                                 .frame(width: 35, height: 35)
