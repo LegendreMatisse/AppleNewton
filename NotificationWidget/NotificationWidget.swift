@@ -32,21 +32,20 @@ struct NotificationWidget: Widget {
             
             LazyVGrid(columns: columns, spacing: 5)
             {
-                /*Text("NVA").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
-                Text("PVDA").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
-                Text("Vlaams Belang").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
-                Text("Vooruit").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
-                Text("Groen").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)
-                Text("Open VLD").font(.system(size: 12)).bold().frame(maxWidth: .infinity, alignment: .center)*/
-                
-                ForEach(["NVA", "PVDA", "Vlaams Belang", "Vooruit", "Groen", "Open VLD"], id: \.self) { item in
-                                HStack {
-                                    Text(item)
-                                        .font(.system(size: 12))
-                                        .bold()
-                                        .multilineTextAlignment(.center)
-                                }
-                            }
+                ForEach(["25.4%", "23%", "15.8%", "12.3%", "11.2%", "5.4%"], id: \.self) { item in
+                    VStack {
+                        //bar chart
+                        Text(item)
+                            .font(.system(size: 12))
+                            .bold()
+                            .multilineTextAlignment(.center)
+                        Image("NVA")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 35, height: 35)
+                            .clipShape(Circle())
+                    }
+                }
             }
             
         }
