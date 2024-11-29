@@ -11,7 +11,7 @@ import ActivityKit
 
 
 
-var team1Scored: Bool = false;
+var team1Scored: Bool = true;
 var team2Scored: Bool = false;
 
 var team1Score: Int = 1
