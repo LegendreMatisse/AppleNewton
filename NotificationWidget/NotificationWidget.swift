@@ -35,6 +35,17 @@ func simulateGoal(team: Int) {
     WidgetCenter.shared.reloadAllTimelines()
 }
 
+func barChart(value: Double) -> some View {
+    GeometryReader { geometry in
+        VStack {
+            Spacer()
+            Rectangle()
+                .fill(Color.blue) // Customize for party color
+                .frame(height: 250 * CGFloat(value / 100))
+        }
+    }
+}
+
 let parties = ["NVA", "PVDA", "VB", "VOORUIT", "GROEN", "CD&V"]
 let partyResults = [25.4, 23, 15.8, 12.3, 11.2, 5.4]
 
@@ -45,35 +56,37 @@ struct NotificationWidget: Widget {
         ActivityConfiguration(for: NotificationAttributes.self) { context in
             //NotificationWidgetView(context: context)
             
-            let columns = [
-                    GridItem(.adaptive(minimum: 56)),
-                    GridItem(.adaptive(minimum: 56)),
-                    GridItem(.adaptive(minimum: 56)),
-                    GridItem(.adaptive(minimum: 56)),
-                    GridItem(.adaptive(minimum: 56)),
-                    GridItem(.adaptive(minimum: 56))
-            ]
-            
-            LazyVGrid(columns: columns, spacing: 5)
-            {
-                ForEach(0..<parties.count) { i in
-                    VStack {
-                        //bar chart
-                        // party results with one decimal behind the comma
-                        let result = String(format: "%.1f", partyResults[i])
-                        Text(result + "%")
-                            .font(.system(size: 12))
-                            .bold()
-                            .multilineTextAlignment(.center)
-                        Image("\(parties[i])")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 35, height: 35)
-                            .clipShape(Circle())
+            if context.state.category == "Elections" {
+                let columns = [
+                        GridItem(.adaptive(minimum: 56)),
+                        GridItem(.adaptive(minimum: 56)),
+                        GridItem(.adaptive(minimum: 56)),
+                        GridItem(.adaptive(minimum: 56)),
+                        GridItem(.adaptive(minimum: 56)),
+                        GridItem(.adaptive(minimum: 56))
+                ]
+                
+                LazyVGrid(columns: columns, spacing: 5)
+                {
+                    ForEach(0..<parties.count) { i in
+                        VStack {
+                            barChart(value: partyResults[i]).frame(height: 100)
+
+                            let result = String(format: "%.1f", partyResults[i])
+                            Text(result + "%")
+                                .font(.system(size: 12))
+                                .bold()
+                                .multilineTextAlignment(.center)
+                            Image("\(parties[i])")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 35, height: 35)
+                                .clipShape(Circle())
+                        }
+                        .padding(.bottom, 10)
                     }
-                }
+                }.padding([.leading, .trailing], 10)
             }
-            
         }
         dynamicIsland: { context in
             let Type: String = context.state.category

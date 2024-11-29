@@ -70,10 +70,18 @@
 		C1E847EB2CF9054800F0FC9C /* Exceptions for "dynamicIslandNotificationTest" folder in "NotificationWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Assets 2.xcassets",
 				ContentView.swift,
 				NotificationAttributes.swift,
 			);
 			target = C1E847D32CF904B800F0FC9C /* NotificationWidgetExtension */;
+		};
+		C1E848902CF9BEF700F0FC9C /* Exceptions for "dynamicIslandNotificationTest" folder in "dynamicIslandNotificationTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Assets 2.xcassets",
+			);
+			target = C1E8479F2CF8FD6700F0FC9C /* dynamicIslandNotificationTest */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -81,6 +89,7 @@
 		C1E847A22CF8FD6700F0FC9C /* dynamicIslandNotificationTest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				C1E848902CF9BEF700F0FC9C /* Exceptions for "dynamicIslandNotificationTest" folder in "dynamicIslandNotificationTest" target */,
 				C1E847EB2CF9054800F0FC9C /* Exceptions for "dynamicIslandNotificationTest" folder in "NotificationWidgetExtension" target */,
 			);
 			path = dynamicIslandNotificationTest;
