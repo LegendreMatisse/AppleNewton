@@ -34,7 +34,7 @@ func barChart(value: Double) -> some View {
     GeometryReader { geometry in
         VStack {
             Spacer()
-            Rectangle()
+            RoundedRectangle(cornerRadius: 10)
                 .fill(Color.blue) // Customize for party color
                 .frame(height: 250 * CGFloat(value / 100))
         }
