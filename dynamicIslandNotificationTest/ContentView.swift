@@ -12,29 +12,29 @@ struct ContentView: View {
     @State private var startTime: Date? = nil
     @State private var isTrackingTime: Bool = false
     @State private var activity: Activity<NotificationAttributes>? = nil
-    @State private var selectedCategory: Category = .sports
-    enum Category: String, CaseIterable, Identifiable {
-        case sports, elections
+    @State public var selectedCategory: Category = .none
+    public enum Category: String, CaseIterable, Identifiable {
+        case Sports, Elections, none
         var id: Self { self }
     }
-    
     
     var body: some View {
         
         NavigationView {
-            
-            
             VStack {
                 
-                if let startTime {
-                    Text(startTime, style: .relative)
-                }
-                
-                Picker("Category", selection: $selectedCategory) {
-                    ForEach(Category.allCases) { category in
-                        Text(category.rawValue.capitalized)
+                if (startTime == nil) {
+                    Picker("Category", selection: $selectedCategory) {
+                        ForEach(Category.allCases) { category in
+                            if (category != Category.none) {
+                                Text(category.rawValue.capitalized)
+                            }
                         }
-                }.pickerStyle(.segmented)
+                    }.pickerStyle(.segmented).padding()
+                }
+                else {
+                    Text("\(selectedCategory) is selected")
+                }
                 Button {
                     isTrackingTime.toggle()
                     
@@ -42,12 +42,12 @@ struct ContentView: View {
                         startTime = Date()
                         
                         let attributes = NotificationAttributes()
-                        let state = NotificationAttributes.ContentState(startTime: Date())
+                        let state = NotificationAttributes.ContentState(startTime: Date(), category: selectedCategory.rawValue)
                         
                         activity = try? Activity<NotificationAttributes>.request(attributes: attributes, contentState: state, pushType: nil)
                     } else {
                         guard let startTime else { return }
-                        let state = NotificationAttributes.ContentState(startTime: startTime)
+                        let state = NotificationAttributes.ContentState(startTime: startTime, category: selectedCategory.rawValue)
                         
                         Task {
                             await activity?.end(using: state, dismissalPolicy: .immediate)
@@ -56,12 +56,14 @@ struct ContentView: View {
                         self.startTime = nil
                     }
                 } label: {
-                    Text(isTrackingTime ? "Stop" : "Start")
+                    Text(isTrackingTime ? "Stop demo" : "Start demo")
                         .fontWeight(.light)
                         .foregroundColor(.white)
-                        .frame(width: 30, height: 30)
-                        .background(Circle().fill(isTrackingTime ? .red : .green))
+                        .frame(width: 200, height: 60)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(isTrackingTime ? .red : .green))
                 }
+                .disabled(selectedCategory == .none)
+                .opacity(selectedCategory == .none ? 0.6 : 1.0)
                 .navigationTitle(Text("Apple Newton"))
                 .navigationBarHidden(true)
             }

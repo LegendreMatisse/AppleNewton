@@ -35,12 +35,19 @@ func simulateGoal(team: Int) {
     WidgetCenter.shared.reloadAllTimelines()
 }
 
+
 struct NotificationWidget: Widget {
+    @State private var activity: Activity<NotificationAttributes>? = nil
+
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: NotificationAttributes.self) { context in
             NotificationWidgetView(context: context)
         }
         dynamicIsland: { context in
+            let Type: String = context.state.category
+            
+            if Type == "Sports" {
+                return DynamicIsland {
             switch Type {
             case .sports:
                 DynamicIsland {
@@ -91,6 +98,7 @@ struct NotificationWidget: Widget {
                         Text("87'").bold().font(.system(size: 16)).foregroundStyle(.gray)
                     }
                     DynamicIslandExpandedRegion(.trailing) {
+                        
                         HStack {
                             Text("\(team2Score)").bold().font(.system(size: 36))
                             Image("Arsenal").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
@@ -113,9 +121,9 @@ struct NotificationWidget: Widget {
                 } minimal: {
                     Text("M")
                 }
-                
-            case .elections:
-                DynamicIsland {
+            }
+           if Type == "Elections"{
+                return DynamicIsland {
                     DynamicIslandExpandedRegion(.leading) {
                         Text("Antwerp").padding(.leading, 14).bold()
                     }
@@ -158,6 +166,32 @@ struct NotificationWidget: Widget {
                     Text("M")
                 }
             }
+            return  DynamicIsland {
+                // Expanded regions
+                DynamicIslandExpandedRegion(.leading) {
+                    // Return an empty or minimal view
+                    EmptyView()
+                }
+                
+                DynamicIslandExpandedRegion(.trailing) {
+                    EmptyView()
+                }
+                
+                DynamicIslandExpandedRegion(.center) {
+                    EmptyView()
+                }
+                
+                DynamicIslandExpandedRegion(.bottom) {
+                    EmptyView()
+                }
+                } compactLeading: {
+                    // Minimal content for the compactLeading
+                    EmptyView()
+                } compactTrailing: {
+                    EmptyView()
+                } minimal: {
+                    EmptyView()
+                }
         }
     }
 }
