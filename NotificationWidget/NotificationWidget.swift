@@ -81,6 +81,35 @@ struct NotificationWidget: Widget {
                         .padding(.bottom, 10)
                     }
                 }.padding([.leading, .trailing], 10)
+            } else if context.state.category == "Sports" {
+                VStack {
+                    HStack {
+                        HStack {
+                            Image("Manchester").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
+                            Text("\(team1Score)").bold().font(.system(size: 36))
+                        }
+                        Spacer()
+                        Text("87'").bold().font(.system(size: 24)).foregroundColor(.gray)
+                        Spacer()
+                        HStack {
+                            Text("\(team2Score)").bold().font(.system(size: 36))
+                            Image("Arsenal").resizable().aspectRatio(contentMode: .fill).frame(width: 50, height: 50)
+                        }
+                    }
+                    HStack {
+                        Image("Ball").resizable().aspectRatio(contentMode: .fill).frame(width: 24, height: 24)
+                        VStack(alignment: .leading) {
+                            Text("E. Haaland")
+                                .bold()
+                                .font(.system(size: 16))
+                            Text("Assist: K. De Bruyne")
+                                .font(.system(size: 12))
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                        Text("42'").bold().font(.system(size: 16)).foregroundColor(.gray)
+                    }
+                }.padding([.leading, .trailing], 10).padding(.top, 10).padding(.bottom, 10)
             }
         }
         dynamicIsland: { context in
