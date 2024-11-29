@@ -9,12 +9,7 @@ import WidgetKit
 import SwiftUI
 import ActivityKit
 
-enum ActivityType {
-    case sports
-    case elections
-}
 
-let Type: ActivityType = .sports
 
 var team1Scored: Bool = false;
 var team2Scored: Bool = false;
@@ -202,7 +197,8 @@ struct NotificationWidget: Widget {
                             Text("ANT").padding(.leading, 8)
                         } compactTrailing: {
                             HStack {
-                                Text("24%").bold()
+                                let result = String(format: "%.1f", partyResults[0])
+                                Text("\(result)%").bold().font(.system(size: 12))
                                 Image("NVA").resizable().aspectRatio(contentMode: .fill).frame(width: 24, height: 24).clipShape(Circle())
                             }
                         } minimal: {
