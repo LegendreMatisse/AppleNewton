@@ -13,5 +13,6 @@ struct NotificationAttributes: ActivityAttributes {
     
     public struct ContentState: Codable, Hashable {
         var startTime: Date
+        var category: String
     }
 }
