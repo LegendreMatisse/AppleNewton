@@ -46,11 +46,8 @@ struct NotificationWidget: Widget {
         dynamicIsland: { context in
             let Type: String = context.state.category
             
-            if Type == "Sports" {
+            if (Type == "Sports") {
                 return DynamicIsland {
-            switch Type {
-            case .sports:
-                DynamicIsland {
                     DynamicIslandExpandedRegion(.bottom) {
                         HStack {
                             if team1Scored {
@@ -122,77 +119,77 @@ struct NotificationWidget: Widget {
                     Text("M")
                 }
             }
-           if Type == "Elections"{
-                return DynamicIsland {
-                    DynamicIslandExpandedRegion(.leading) {
-                        Text("Antwerp").padding(.leading, 14).bold()
-                    }
-                    DynamicIslandExpandedRegion(.bottom) {
-                        HStack {
-                            Spacer()
-                            ForEach(0..<6) { _ in
-                                VStack {
-                                    Text("24%").font(.system(size: 12)).bold()
-                                    Image("NVA")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 35, height: 35)
-                                        .clipShape(Circle())
-                                }
-                                .frame(maxWidth: .infinity)
+                    if (Type == "Elections") {
+                        return DynamicIsland {
+                            DynamicIslandExpandedRegion(.leading) {
+                                Text("Antwerp").padding(.leading, 14).bold()
                             }
-                            Spacer()
-                        }.padding(.top, 14)
-                    }
-                    DynamicIslandExpandedRegion(.trailing) {
-                        HStack(alignment: .bottom, spacing: 2) {
-                            Text("40")
-                                .font(.system(size: 16))
-                                .bold()
-                            Text("/300")
-                                .font(.system(size: 12))
-                                .foregroundStyle(.secondary)
+                            DynamicIslandExpandedRegion(.bottom) {
+                                HStack {
+                                    Spacer()
+                                    ForEach(0..<6) { _ in
+                                        VStack {
+                                            Text("24%").font(.system(size: 12)).bold()
+                                            Image("NVA")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 35, height: 35)
+                                                .clipShape(Circle())
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                    }
+                                    Spacer()
+                                }.padding(.top, 14)
+                            }
+                            DynamicIslandExpandedRegion(.trailing) {
+                                HStack(alignment: .bottom, spacing: 2) {
+                                    Text("40")
+                                        .font(.system(size: 16))
+                                        .bold()
+                                    Text("/300")
+                                        .font(.system(size: 12))
+                                        .foregroundStyle(.secondary)
+                                }
+                                .padding(.trailing, 14)
+                            }
+                        } compactLeading: {
+                            Text("ANT").padding(.leading, 8)
+                        } compactTrailing: {
+                            HStack {
+                                Text("24%").bold()
+                                Image("NVA").resizable().aspectRatio(contentMode: .fill).frame(width: 24, height: 24).clipShape(Circle())
+                            }
+                        } minimal: {
+                            Text("M")
                         }
-                        .padding(.trailing, 14)
                     }
-                } compactLeading: {
-                    Text("ANT").padding(.leading, 8)
-                } compactTrailing: {
-                    HStack {
-                        Text("24%").bold()
-                        Image("NVA").resizable().aspectRatio(contentMode: .fill).frame(width: 24, height: 24).clipShape(Circle())
+                    return DynamicIsland {
+                        // Expanded regions
+                        DynamicIslandExpandedRegion(.leading) {
+                            // Return an empty or minimal view
+                            EmptyView()
+                        }
+                        
+                        DynamicIslandExpandedRegion(.trailing) {
+                            EmptyView()
+                        }
+                        
+                        DynamicIslandExpandedRegion(.center) {
+                            EmptyView()
+                        }
+                        
+                        DynamicIslandExpandedRegion(.bottom) {
+                            EmptyView()
+                        }
+                    } compactLeading: {
+                        // Minimal content for the compactLeading
+                        EmptyView()
+                    } compactTrailing: {
+                        EmptyView()
+                    } minimal: {
+                        EmptyView()
                     }
-                } minimal: {
-                    Text("M")
                 }
-            }
-            return  DynamicIsland {
-                // Expanded regions
-                DynamicIslandExpandedRegion(.leading) {
-                    // Return an empty or minimal view
-                    EmptyView()
-                }
-                
-                DynamicIslandExpandedRegion(.trailing) {
-                    EmptyView()
-                }
-                
-                DynamicIslandExpandedRegion(.center) {
-                    EmptyView()
-                }
-                
-                DynamicIslandExpandedRegion(.bottom) {
-                    EmptyView()
-                }
-                } compactLeading: {
-                    // Minimal content for the compactLeading
-                    EmptyView()
-                } compactTrailing: {
-                    EmptyView()
-                } minimal: {
-                    EmptyView()
-                }
-        }
     }
 }
 
